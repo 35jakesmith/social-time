@@ -2,7 +2,7 @@ const { Thought, User } = require('../models');
 
 const thoughtController = {
   getAllThoughts(req, res) {
-    Thought.find({})
+    Thought.find()
     .then(dbThoughtData => res.json(dbThoughtData))
     .catch(err => {
       console.log(err);
@@ -51,16 +51,16 @@ const thoughtController = {
     Thought.findOneAndUpdate({ _id: params.thoughtid }, body, { new: true, runValidators: true })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
-          res.status(404).json({ message: 'No Thought found with this id!' });
+          res.status(404).json
           return;
         }
-        res.json(dbThoughttData);
+        res.json(dbThoughtData);
       })
       .catch(err => res.status(400).json(err));
   },
 
     // delete thought
-    Thought({ params }, res) {
+    deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.thoughtId })
           .then(deletedThought => {
             if (!deletedThought) {
